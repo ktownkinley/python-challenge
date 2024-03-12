@@ -60,13 +60,14 @@ def calc_profit_loss_change(lines):
     return average, greatest_profit, greatest_loss
 
 def main():
-
+    #Calculate the data with given csv file
     file_lines = readfile(os.path.join("C:\\Users\\mckin\\Documents\\python-challenge\\PyBank\\Resources\\budget_data.csv"))
     print(file_lines)
     header = file_lines.pop(0)
     total_months = calc_months(file_lines)
     net_amount = calc_net_amount(file_lines)
     avg_change, greatest_profit, greatest_loss = calc_profit_loss_change(file_lines)
+    #Print the results
     print("Financial Analysis")
     print("----------------------------")
     print(f'Total Months: {total_months}')
@@ -74,6 +75,7 @@ def main():
     print(f'Average Change: {avg_change}')
     print(f'Greatest Increase in Profits: {greatest_profit[0]} (${greatest_profit[1]})')
     print(f'Greatest Decrease in Profits: {greatest_loss[0]} (${greatest_loss[1]})')
+    #Write the results to a txt file
     writefile(os.path.join("C:\\Users\\mckin\\Documents\\python-challenge\\PyBank\\analysis"), total_months, net_amount, avg_change, greatest_profit, greatest_loss)
 
 if __name__ == "__main__":
