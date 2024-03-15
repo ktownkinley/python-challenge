@@ -1,5 +1,6 @@
 import csv
 import os
+from pathlib import Path
 
 def readfile(filepath):
     #Takes a file path and reads the lines, returning a list of lists
@@ -61,7 +62,7 @@ def calc_profit_loss_change(lines):
 
 def main():
     #Calculate the data with given csv file
-    file_lines = readfile(os.path.join("C:\\Users\\mckin\\Documents\\python-challenge\\PyBank\\Resources\\budget_data.csv"))
+    file_lines = readfile(Path("Resources/budget_data.csv"))
     print(file_lines)
     header = file_lines.pop(0)
     total_months = calc_months(file_lines)
@@ -76,7 +77,7 @@ def main():
     print(f'Greatest Increase in Profits: {greatest_profit[0]} (${greatest_profit[1]})')
     print(f'Greatest Decrease in Profits: {greatest_loss[0]} (${greatest_loss[1]})')
     #Write the results to a txt file
-    writefile(os.path.join("C:\\Users\\mckin\\Documents\\python-challenge\\PyBank\\analysis"), total_months, net_amount, avg_change, greatest_profit, greatest_loss)
+    writefile(Path("/analysis"), total_months, net_amount, avg_change, greatest_profit, greatest_loss)
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,5 @@
 import csv
+from pathlib import Path
 
 def readfile(path):
     #Takes a file path and reads the lines, returning a list of lists
@@ -12,15 +13,15 @@ def readfile(path):
 def writefile(path, total_votes, candidates, perc_votes, tot_cand_votes, winner):
     #Takes a file path and the calculated values and writes them to a .txt file
     with open(path + "\\results.txt", mode="w") as txtfile:
-        print("Election Results")
-        print("------------------------")
-        print(f'Total Votes: {total_votes}')
-        print("------------------------")
+        txtfile.write("Election Results\n")
+        txtfile.write("------------------------\n")
+        txtfile.write(f'Total Votes: {total_votes}\n')
+        txtfile.write("------------------------\n")
         for cand in candidates:
-            print(f'{cand}: {perc_votes[cand]}% ({tot_cand_votes[cand]})')
-        print("------------------------")
-        print(f'Winner: {winner}')
-        print("------------------------")
+            txtfile.write(f'{cand}: {perc_votes[cand]}% ({tot_cand_votes[cand]})\n')
+        txtfile.write("------------------------\n")
+        txtfile.write(f'Winner: {winner}\n')
+        txtfile.write("------------------------\n")
 
 def cand_list(lines):
     #Takes the file lines and returns a list of all the candidates
@@ -56,7 +57,7 @@ def calc_winner(total_votes):
 
 def main():
     #Calculate all the data with the given csv file
-    file_lines = readfile("C:\\Users\\mckin\\Documents\\python-challenge\\PyPoll\\Resources\\election_data.csv")
+    file_lines = readfile(Path("./Resources/election_data.csv"))
     header = file_lines.pop(0)
     total_votes = len(file_lines)
     candidates = cand_list(file_lines)
@@ -73,7 +74,7 @@ def main():
     print(f'Winner: {winner}')
     print("------------------------")
     #Write the results to a txt file
-    writefile("C:\\Users\\mckin\\Documents\\python-challenge\\PyPoll\\analysis", total_votes, candidates, perc_votes, tot_cand_votes, winner)
+    writefile(Path("./analysis"), total_votes, candidates, perc_votes, tot_cand_votes, winner)
 
 if __name__ == "__main__":
     main()
